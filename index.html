@@ -11,6 +11,23 @@
     <script>
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
+
+        /* Skip preloader on return visits within the same session
+           – first visit: preloader runs normally, then sessionStorage is set
+           – subsequent visits (navigating back): skip preloader instantly     */
+        (function () {
+            if (sessionStorage.getItem('xq_visited')) {
+                document.documentElement.classList.add('no-preload');
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                sessionStorage.setItem('xq_visited', '1');
+                if (document.documentElement.classList.contains('no-preload')) {
+                    var preloader = document.getElementById('preloader');
+                    if (preloader) preloader.style.display = 'none';
+                    document.body.classList.add('ss-show');
+                }
+            });
+        })();
     </script>
 
     <!-- CSS
@@ -236,7 +253,7 @@
 
                 <div class="s-header__block">
                     <div class="s-header__logo">
-                        <a class="logo" href="about.html">
+                        <a class="logo" href="index.html">
                             <img src="images/logo.jpg" alt="Homepage">
                         </a>
                     </div>
@@ -247,7 +264,7 @@
                 <nav class="s-header__nav">
     
                     <ul class="s-header__menu-links">
-                        <li class="current"><a href="about.html">About</a></li>
+                        <li class="current"><a href="index.html">About</a></li>
                         <li><a href="Publications.html">Publications</a></li>
                         <!-- <li><a href="blog.html">Journal</a></li> -->
                         <li><a href="contact.html">Contact</a></li>
@@ -287,7 +304,7 @@
                             </h1>
                         <ul class="s-about__social social-list">
                                 <li>
-                                    <a href="https://www.facebook.com/quang.lexus.1408/" target="_blank">
+                                    <a href="https://www.facebook.com/lexuanquang.lexus/" target="_blank">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"width="24" height="24" style="fill:rgba(0, 0, 0, 1);">
                                             <path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"/></svg>
                                         <span class="u-screen-reader-text">Facebook</span>
@@ -374,6 +391,14 @@
                                          research intern at LIFAT laboratory – Université de Tours.
                                 <br>
                                 <br>
+                                        Beyond technology, I enjoy exploring mathematics, 
+                                        performance optimization, and innovative ways to apply AI 
+                                        to real-world challenges. This website showcases my projects, 
+                                        research journey, and technical interests as I continue 
+                                        growing toward becoming a strong Applied AI and System Engineer.
+
+                                <br>
+                                <br>
                                 Thank you for visiting, and I look forward to sharing my journey and work with you!
                             </p>
 
@@ -393,102 +418,183 @@
             ----------------------------------------------- -->
             <section id="about-detail" class="s-pagecontent pagecontent">
 
+                <style>
+                    /* PR group container */
+                    .pr-group {
+                        margin-bottom: 3.2rem;
+                    }
+                    .pr-group__header {
+                        display: flex;
+                        align-items: center;
+                        gap: 1.6rem;
+                        margin-bottom: 1.2rem;
+                    }
+                    .pr-group__label {
+                        font-size: 1.1rem;
+                        font-weight: 700;
+                        letter-spacing: .15em;
+                        text-transform: uppercase;
+                        color: var(--color-1, #97b34a);
+                        border: 1px solid var(--color-1, #97b34a);
+                        padding: .3rem .8rem;
+                        border-radius: 3px;
+                        white-space: nowrap;
+                    }
+                    .pr-toggle {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: .5rem;
+                        padding: .5rem 1.4rem;
+                        background: transparent;
+                        border: 1px solid currentColor;
+                        color: inherit;
+                        border-radius: 3px;
+                        font-size: 1.3rem;
+                        cursor: pointer;
+                        opacity: .7;
+                        transition: opacity .2s, background .2s, color .2s;
+                    }
+                    .pr-toggle:hover { opacity: 1; }
+                    .pr-toggle .t-arrow {
+                        display: inline-block;
+                        transition: transform .25s;
+                    }
+                    .pr-toggle.open .t-arrow { transform: rotate(90deg); }
+
+                    /* Collapsible list inside PR group */
+                    .pr-group__body {
+                        display: none;
+                        border-left: 2px solid var(--color-1, #97b34a);
+                        padding-left: 2rem;
+                        margin-top: 1.6rem;
+                    }
+                    .pr-group__body.open { display: block; }
+
+                    /* Individual article row */
+                    .pr-article {
+                        padding: 1.6rem 0;
+                        border-bottom: 1px solid rgba(255,255,255,.07);
+                    }
+                    .pr-article:last-child { border-bottom: none; }
+                    .pr-article__num {
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                        opacity: .5;
+                        margin-bottom: .6rem;
+                    }
+                    .pr-article__iframe {
+                        margin-top: .4rem;
+                    }
+                </style>
 
                     <div class="row width-narrower pagemain">
-                        <div class="column xl-12"> 
+                        <div class="column xl-12">
 
                             <h2 class="u-add-bottom">My Values & Beliefs</h2>
 
+                            <!-- ── All articles as plain links ────────── -->
                             <div class="grid-list-items list-items">
+
                                 <div class="grid-list-items__item list-items__item u-remove-bottom">
                                     <div class="list-items__item-header">
-                                        <a href="cntt.hdu.edu.vn/thanh-cong-tu-chuong-trinh-trao-doi-sinh-vien-voi-phap.html">
-                                            <p>
-                                               01. thanh-cong-tu-chuong-trinh-trao-doi-sinh-vien-voi-phap
-                                           </p>
+                                        <a href="https://cntt.hdu.edu.vn/thanh-cong-tu-chuong-trinh-trao-doi-sinh-vien-voi-phap?brid=YWdncwH2F9qVOava0Sw-IfhP9NFG" target="_blank">
+                                            <p>01. Thành công từ chương trình trao đổi sinh viên với Pháp</p>
                                         </a>
-                                        <!-- <h6 class="list-items__item-small-title" href=""></h6> -->
                                     </div>
-                                    <div class="iframe-responsive"><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid0s55LnAjM4a7y5th3pT2Mu1yLugnxnDjmGP4MDoXaPt5j3PL9ZXxedYzFaFSpRAuTl&show_text=true&width=400" 
-                                    width="100%" height="600" style="border:none;overflow:hidden" 
-                                    scrolling="no" frameborder="0" allowfullscreen="true"
-                                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-                                     <p>
-                                        (Click on the image or link to see details)
-                                     </p>
-                                     
-                               
-                                </div>
-                                <div class="grid-list-items__item list-items__item u-remove-bottom">
-                                    <div class="list-items__item-header">
-                                        <a href="cntt.hdu.edu.vn/hai-sinh-vien-thuc-tap-sinh-hoan-thanh-chuong-trinh-thuc-tap-tai-truong-polytechtour-phap.html">
-                                         <p> 
-                                          02. hai-sinh-vien-thuc-tap-sinh-hoan-thanh-chuong-trinh-thuc-tap-tai-truong-polytechtour-phap
-                                         </p>
-                                        </a>
-                                        <!-- <h6 class="list-items__item-small-title">Adipisicing</h6> -->
-                                    </div>
-                                    <div class="iframe-responsive"><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid0yKYXk4LSAAiK1ybEatyxhmuBSL4Xw3KAk8gmPXxhYNuFsQrQZ4uZ6sumMAR6jhohl&show_text=true&width=400" 
-                                    width="100%" height="600" style="border:none;overflow:hidden" 
-                                    scrolling="no" frameborder="0" allowfullscreen="true" 
-                                    allow="autoplay; clipboard-write; encrypted-media; 
-                                    picture-in-picture; web-share"></iframe></div>
-                                    <p> 
-                                     (Click on the image or link to see details)
-                                    </p>
-                                </div>
-                                <div class="grid-list-items__item list-items__item u-remove-bottom">
-                                    <div class="list-items__item-header">
-                                        <a href="cntt.hdu.edu.vn/khoa-cntt-tt-gui-sinh-vien-di-thuc-tap-tot-nghiep-tai-phap.html">
-                                         <p> 
-                                          03. khoa-cntt-tt-gui-sinh-vien-di-thuc-tap-tot-nghiep-tai-phap
-                                         </p>
-                                        </a>
-                                        <!-- <h6 class="list-items__item-small-title">Adipisicing</h6> -->
-                                    </div>
-                                    <div class="iframe-responsive"><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid02oA8tiGmi9z7y1kamBri2QFhTZz8MsBYTVFxxG5vU9FUWNCRXJ68fA2GAFBQy8kWhl&show_text=true&width=400" 
-                                    width="100%" height="600"
-                                     style="border:none;overflow:hidden" 
-                                     scrolling="no" frameborder="0" allowfullscreen="true" 
-                                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
-                                    <p> 
-                                     (Click on the image or link to see details)
-                                    </p>
-                                </div>
-                                <div class="grid-list-items__item list-items__item u-remove-bottom">
-                                    <div class="list-items__item-header">
-                                        <a href="cntt.hdu.edu.vn/truong-dai-hoc-hong-duc-tich-cuc-phat-trien-cac-hoat-dong-hop-tac-quoc-te-voi-truong-dai-hoc-polytech-tours-phap.html">
-                                         <p> 
-                                          03. truong-dai-hoc-hong-duc-tich-cuc-phat-trien-cac-hoat-dong-hop-tac-quoc-te-voi-truong-dai-hoc-polytech-tours-phap
-                                         </p>
-                                        </a>
-                                        <!-- <h6 class="list-items__item-small-title">Adipisicing</h6> -->
-                                    </div>
-                                    
-                                    <p> 
-                                     (Click on the image or link to see details)
-                                    </p>
                                 </div>
 
-                            </div>
                                 <div class="grid-list-items__item list-items__item u-remove-bottom">
                                     <div class="list-items__item-header">
-                                        <a href="cntt.hdu.edu.vn/khoa-cong-nghe-thong-tin-va-truyen-thong-nghiem-thu-thanh-cong-6-de-tai-nghien-cuu-khoa-hoc-sinh-vien.html">
-                                            <P>
-                                                05. khoa-cong-nghe-thong-tin-va-truyen-thong-nghiem-thu-thanh-cong-6-de-tai-nghien-cuu-khoa-hoc-sinh-vien
-                                            </P>
+                                        <a href="https://cntt.hdu.edu.vn/hai-sinh-vien-thuc-tap-sinh-hoan-thanh-chuong-trinh-thuc-tap-tai-truong-polytechtour-phap?brid=YWdncwEthonQEQldcK_oYawI6hHG" target="_blank">
+                                            <p>02. Hai sinh viên thực tập sinh hoàn thành chương trình thực tập tại trường Polytech Tours Pháp</p>
                                         </a>
-                                        <!-- <h6 class="list-items__item-small-title">Assumenda</h6> -->
                                     </div>
-                                    <p>
-                                        (Click on the image or link to see details)
-                                    </p>
                                 </div>
-                            </div> <!--grid-list-items -->
 
+                                <div class="grid-list-items__item list-items__item u-remove-bottom">
+                                    <div class="list-items__item-header">
+                                        <a href="https://cntt.hdu.edu.vn/khoa-cntt-tt-gui-sinh-vien-di-thuc-tap-tot-nghiep-tai-phap?brid=YWdncwGm5YKbmYeWPfuew6rN972G" target="_blank">
+                                            <p>03. Khoa CNTT-TT gửi sinh viên đi thực tập tốt nghiệp tại Pháp</p>
+                                        </a>
+                                    </div>
+                                </div>
 
-                        </div> <!-- end grid-block-->
+                                <div class="grid-list-items__item list-items__item u-remove-bottom">
+                                    <div class="list-items__item-header">
+                                        <a href="https://cntt.hdu.edu.vn/truong-dai-hoc-hong-duc-tich-cuc-phat-trien-cac-hoat-dong-hop-tac-quoc-te-voi-truong-dai-hoc-polytech-tours-phap?brid=YWdncwGm5YKbmYeWPfuew6rN972G" target="_blank">
+                                            <p>04. Trường Đại học Hồng Đức tích cực phát triển các hoạt động hợp tác quốc tế với trường Đại học Polytech Tours Pháp</p>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="grid-list-items__item list-items__item u-remove-bottom">
+                                    <div class="list-items__item-header">
+                                        <a href="https://cntt.hdu.edu.vn/khoa-cong-nghe-thong-tin-va-truyen-thong-nghiem-thu-thanh-cong-6-de-tai-nghien-cuu-khoa-hoc-sinh-vien.html" target="_blank">
+                                            <p>05. Khoa Công nghệ thông tin và Truyền thông nghiệm thu thành công 6 đề tài nghiên cứu khoa học sinh viên</p>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div> <!-- end grid-list-items -->
+
+                            <!-- ── PR group (iframes) ─────────────────── -->
+                            <div class="pr-group">
+                                <div class="pr-group__header">
+                                    <span class="pr-group__label">PR</span>
+                                    <button class="pr-toggle" id="pr-toggle-btn">
+                                        <span class="t-arrow">▶</span> Xem bài viết
+                                    </button>
+                                </div>
+
+                                <div class="pr-group__body" id="pr-body">
+
+                                    <div class="pr-article">
+                                        <p class="pr-article__num">01.</p>
+                                        <div class="pr-article__iframe iframe-responsive">
+                                            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid0s55LnAjM4a7y5th3pT2Mu1yLugnxnDjmGP4MDoXaPt5j3PL9ZXxedYzFaFSpRAuTl&show_text=true&width=400"
+                                                width="100%" height="600" style="border:none;overflow:hidden"
+                                                scrolling="no" frameborder="0" allowfullscreen="true"
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                        </div>
+                                    </div>
+
+                                    <div class="pr-article">
+                                        <p class="pr-article__num">02.</p>
+                                        <div class="pr-article__iframe iframe-responsive">
+                                            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid0yKYXk4LSAAiK1ybEatyxhmuBSL4Xw3KAk8gmPXxhYNuFsQrQZ4uZ6sumMAR6jhohl&show_text=true&width=400"
+                                                width="100%" height="600" style="border:none;overflow:hidden"
+                                                scrolling="no" frameborder="0" allowfullscreen="true"
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                        </div>
+                                    </div>
+
+                                    <div class="pr-article">
+                                        <p class="pr-article__num">03.</p>
+                                        <div class="pr-article__iframe iframe-responsive">
+                                            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid02oA8tiGmi9z7y1kamBri2QFhTZz8MsBYTVFxxG5vU9FUWNCRXJ68fA2GAFBQy8kWhl&show_text=true&width=400"
+                                                width="100%" height="600" style="border:none;overflow:hidden"
+                                                scrolling="no" frameborder="0" allowfullscreen="true"
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                        </div>
+
+                                </div> <!-- end pr-group__body -->
+                            </div> <!-- end pr-group -->
+
+                        </div> <!-- end grid-block -->
                     </div> <!-- end pagemain -->
+
+                <script>
+                    (function () {
+                        var btn  = document.getElementById('pr-toggle-btn');
+                        var body = document.getElementById('pr-body');
+                        if (!btn || !body) return;
+                        btn.addEventListener('click', function () {
+                            var isOpen = body.classList.toggle('open');
+                            btn.classList.toggle('open', isOpen);
+                            btn.querySelector('.t-arrow').textContent = isOpen ? '▼' : '▶';
+                        });
+                    })();
+                </script>
 
             </section> <!-- end about-detail -->
 
@@ -536,7 +642,7 @@
                 <div class="column xl-6 lg-12">
                     <p class="ss-copyright">
                         <span>© Copyright Xuan Quang 2024</span> 
-                        <span>Redesign by <a href="https://quangxuanle21.github.io/2024/">XuanQuang</a> Distribution By <a href="https://themewagon.com">ThemeWagon</a></span>
+                        <span>Redesign by <a href="">XuanQuang</a> Distribution By <a href="https://themewagon.com">ThemeWagon</a></span>
                     </p>
                 </div>
 
