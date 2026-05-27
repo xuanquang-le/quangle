@@ -25,6 +25,122 @@
     <link rel="icon" type="image/png" sizes="16x16" href="Q 16.png">
     <link rel="manifest" href="site.webmanifest">
 
+
+    <!-- Mobile / Responsive Overrides
+    ================================================== -->
+    <style>
+        /* Base responsive fixes */
+        *, *::before, *::after { box-sizing: border-box; }
+        body, .s-pagewrap { overflow-x: hidden; }
+        img { max-width: 100%; height: auto; }
+
+        /* Responsive iframes */
+        .iframe-responsive {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .iframe-responsive iframe {
+            width: 100% !important;
+            max-width: 100% !important;
+            display: block;
+        }
+
+        /* ── Mobile (≤ 600px) ─────────────────────────── */
+        @media screen and (max-width: 600px) {
+            /* Prevent overflow */
+            .row, .s-content, .s-header__inner,
+            .s-intro__content, .s-about__content,
+            .s-pagecontent, .pagecontent { 
+                padding-left: 1.6rem !important;
+                padding-right: 1.6rem !important;
+            }
+
+            /* Intro title */
+            .s-intro__content-title { 
+                font-size: clamp(3.2rem, 8vw, 5.6rem) !important;
+                line-height: 1.15 !important;
+            }
+            .s-intro__content-pretitle { font-size: 1.4rem !important; }
+
+            /* About section */
+            .s-about__content-main { padding: 0 !important; }
+            .attention-getter { font-size: 1.6rem !important; }
+
+            /* Grid items stack full width */
+            .grid-list-items { display: block !important; }
+            .grid-list-items__item { 
+                width: 100% !important; 
+                margin-bottom: 3.2rem !important;
+            }
+
+            /* Publications list */
+            .list-items__item { width: 100% !important; }
+            .list-items__item-title { font-size: 1.8rem !important; }
+
+            /* Social icons row */
+            .s-about__social.social-list,
+            .s-footer__social.social-list {
+                flex-wrap: wrap;
+                gap: 1.4rem !important;
+                justify-content: center;
+            }
+
+            /* Page header */
+            .page-title { 
+                font-size: clamp(3.2rem, 9vw, 5.6rem) !important; 
+            }
+
+            /* Page intro two-col → single col */
+            .pageintro .column { width: 100% !important; }
+
+            /* Footer bottom center on mobile */
+            .s-footer__bottom .column { width: 100% !important; }
+            .ss-copyright { 
+                text-align: center !important;
+                margin-top: 1.6rem;
+            }
+            .s-footer__social { justify-content: center !important; }
+
+            /* Buttons full width */
+            .btn.u-fullwidth { 
+                width: 100% !important;
+                text-align: center;
+            }
+
+            /* Header nav button */
+            .s-header__contact-btn { 
+                font-size: 1.2rem !important;
+                padding: 0.8rem 1.2rem !important;
+            }
+        }
+
+        /* ── Tablet (601px – 900px) ───────────────────── */
+        @media screen and (min-width: 601px) and (max-width: 900px) {
+            .s-intro__content-title { 
+                font-size: clamp(4rem, 7vw, 7rem) !important;
+            }
+            .grid-list-items__item { width: 100% !important; }
+            .iframe-responsive iframe { height: 500px !important; }
+        }
+    </style>
+
+    <!-- Sticky Header
+    ================================================== -->
+    <style>
+        .s-header {
+            position: fixed !important;
+            top: 0; left: 0; right: 0;
+            width: 100%;
+            z-index: 999;
+            background: rgba(17, 17, 17, 0.92) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            transition: background 0.3s ease;
+        }
+        [id] { scroll-margin-top: 80px; }
+    </style>
+
 </head>
 
 

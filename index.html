@@ -25,6 +25,187 @@
     <link rel="icon" type="image/png" sizes="16x16" href="Q 16.png">
     <link rel="manifest" href="site.webmanifest">
 
+
+    <!-- Mobile / Responsive Overrides
+    ================================================== -->
+    <style>
+        /* Base responsive fixes */
+        *, *::before, *::after { box-sizing: border-box; }
+        body, .s-pagewrap { overflow-x: hidden; }
+        img { max-width: 100%; height: auto; }
+
+        /* Responsive iframes */
+        .iframe-responsive {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .iframe-responsive iframe {
+            width: 100% !important;
+            max-width: 100% !important;
+            display: block;
+        }
+
+        /* ── Mobile (≤ 600px) ─────────────────────────── */
+        @media screen and (max-width: 600px) {
+            /* Prevent overflow */
+            .row, .s-content, .s-header__inner,
+            .s-intro__content, .s-about__content,
+            .s-pagecontent, .pagecontent { 
+                padding-left: 1.6rem !important;
+                padding-right: 1.6rem !important;
+            }
+
+            /* Intro title */
+            .s-intro__content-title { 
+                font-size: clamp(3.2rem, 8vw, 5.6rem) !important;
+                line-height: 1.15 !important;
+            }
+            .s-intro__content-pretitle { font-size: 1.4rem !important; }
+
+            /* About section */
+            .s-about__content-main { padding: 0 !important; }
+            .attention-getter { font-size: 1.6rem !important; }
+
+            /* Grid items stack full width */
+            .grid-list-items { display: block !important; }
+            .grid-list-items__item { 
+                width: 100% !important; 
+                margin-bottom: 3.2rem !important;
+            }
+
+            /* Publications list */
+            .list-items__item { width: 100% !important; }
+            .list-items__item-title { font-size: 1.8rem !important; }
+
+            /* Social icons row */
+            .s-about__social.social-list,
+            .s-footer__social.social-list {
+                flex-wrap: wrap;
+                gap: 1.4rem !important;
+                justify-content: center;
+            }
+
+            /* Page header */
+            .page-title { 
+                font-size: clamp(3.2rem, 9vw, 5.6rem) !important; 
+            }
+
+            /* Page intro two-col → single col */
+            .pageintro .column { width: 100% !important; }
+
+            /* Footer bottom center on mobile */
+            .s-footer__bottom .column { width: 100% !important; }
+            .ss-copyright { 
+                text-align: center !important;
+                margin-top: 1.6rem;
+            }
+            .s-footer__social { justify-content: center !important; }
+
+            /* Buttons full width */
+            .btn.u-fullwidth { 
+                width: 100% !important;
+                text-align: center;
+            }
+
+            /* Header nav button */
+            .s-header__contact-btn { 
+                font-size: 1.2rem !important;
+                padding: 0.8rem 1.2rem !important;
+            }
+        }
+
+        /* ── Tablet (601px – 900px) ───────────────────── */
+        @media screen and (min-width: 601px) and (max-width: 900px) {
+            .s-intro__content-title { 
+                font-size: clamp(4rem, 7vw, 7rem) !important;
+            }
+            .grid-list-items__item { width: 100% !important; }
+            .iframe-responsive iframe { height: 500px !important; }
+        }
+    </style>
+
+
+    <!-- Sticky Header
+    ================================================== -->
+    <style>
+        /* Fixed header — stays on top when scrolling */
+        .s-header {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 999;
+            background: rgba(17, 17, 17, 0.82) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            transition: background 0.3s ease;
+        }
+
+        /* When page is at top (hero), header is more transparent */
+        .ss-home .s-header {
+            background: rgba(17, 17, 17, 0.55) !important;
+        }
+        /* After scrolling, header becomes more opaque */
+        .ss-home .s-header.header-scrolled {
+            background: rgba(17, 17, 17, 0.92) !important;
+        }
+
+        /* Anchor targets under fixed header get offset */
+        [id] {
+            scroll-margin-top: 80px;
+        }
+    </style>
+
+    <script>
+        /* Header opacity: transparent at top, solid when scrolled */
+        document.addEventListener('DOMContentLoaded', function () {
+            var header = document.querySelector('.s-header');
+            if (!header) return;
+            function onScroll() {
+                if (window.scrollY > 60) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        });
+    </script>
+
+    <!-- Social Icons Layout (animation handled in css/styles.css)
+    ================================================== -->
+    <style>
+        .s-intro__content-text .s-about__social.social-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            padding: 0;
+            margin: 2.8rem 0 0 0;
+            list-style: none;
+        }
+
+        /* Hover spring effect */
+        .s-intro__content-text .s-about__social li a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        background 0.25s ease,
+                        box-shadow 0.25s ease;
+        }
+        .s-intro__content-text .s-about__social li a:hover {
+            transform: translateY(-5px) scale(1.18);
+            background: rgba(0, 0, 0, 0.06);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+
 </head>
 
 
@@ -193,14 +374,6 @@
                                          research intern at LIFAT laboratory – Université de Tours.
                                 <br>
                                 <br>
-                                        Beyond technology, I enjoy exploring mathematics, 
-                                        performance optimization, and innovative ways to apply AI 
-                                        to real-world challenges. This website showcases my projects, 
-                                        research journey, and technical interests as I continue 
-                                        growing toward becoming a strong Applied AI and System Engineer.
-
-                                <br>
-                                <br>
                                 Thank you for visiting, and I look forward to sharing my journey and work with you!
                             </p>
 
@@ -236,10 +409,10 @@
                                         </a>
                                         <!-- <h6 class="list-items__item-small-title" href=""></h6> -->
                                     </div>
-                                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid0s55LnAjM4a7y5th3pT2Mu1yLugnxnDjmGP4MDoXaPt5j3PL9ZXxedYzFaFSpRAuTl&show_text=true&width=400" 
-                                    width="500" height="600" style="border:none;overflow:hidden" 
+                                    <div class="iframe-responsive"><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid0s55LnAjM4a7y5th3pT2Mu1yLugnxnDjmGP4MDoXaPt5j3PL9ZXxedYzFaFSpRAuTl&show_text=true&width=400" 
+                                    width="100%" height="600" style="border:none;overflow:hidden" 
                                     scrolling="no" frameborder="0" allowfullscreen="true"
-                                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
                                      <p>
                                         (Click on the image or link to see details)
                                      </p>
@@ -255,11 +428,11 @@
                                         </a>
                                         <!-- <h6 class="list-items__item-small-title">Adipisicing</h6> -->
                                     </div>
-                                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid0yKYXk4LSAAiK1ybEatyxhmuBSL4Xw3KAk8gmPXxhYNuFsQrQZ4uZ6sumMAR6jhohl&show_text=true&width=400" 
-                                    width="500" height="600" style="border:none;overflow:hidden" 
+                                    <div class="iframe-responsive"><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid0yKYXk4LSAAiK1ybEatyxhmuBSL4Xw3KAk8gmPXxhYNuFsQrQZ4uZ6sumMAR6jhohl&show_text=true&width=400" 
+                                    width="100%" height="600" style="border:none;overflow:hidden" 
                                     scrolling="no" frameborder="0" allowfullscreen="true" 
                                     allow="autoplay; clipboard-write; encrypted-media; 
-                                    picture-in-picture; web-share"></iframe>
+                                    picture-in-picture; web-share"></iframe></div>
                                     <p> 
                                      (Click on the image or link to see details)
                                     </p>
@@ -273,11 +446,11 @@
                                         </a>
                                         <!-- <h6 class="list-items__item-small-title">Adipisicing</h6> -->
                                     </div>
-                                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid02oA8tiGmi9z7y1kamBri2QFhTZz8MsBYTVFxxG5vU9FUWNCRXJ68fA2GAFBQy8kWhl&show_text=true&width=400" 
-                                    width="500" height="600"
+                                    <div class="iframe-responsive"><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftvtscongnghethongtin%2Fposts%2Fpfbid02oA8tiGmi9z7y1kamBri2QFhTZz8MsBYTVFxxG5vU9FUWNCRXJ68fA2GAFBQy8kWhl&show_text=true&width=400" 
+                                    width="100%" height="600"
                                      style="border:none;overflow:hidden" 
                                      scrolling="no" frameborder="0" allowfullscreen="true" 
-                                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
                                     <p> 
                                      (Click on the image or link to see details)
                                     </p>

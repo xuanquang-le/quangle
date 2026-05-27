@@ -25,6 +25,62 @@
     <link rel="icon" type="image/png" sizes="16x16" href="Q 16.png">
     <link rel="manifest" href="site.webmanifest">
 
+
+    <!-- Mobile / Responsive Overrides
+    ================================================== -->
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body, .s-pagewrap { overflow-x: hidden; }
+        img { max-width: 100%; height: auto; }
+        .iframe-responsive { position: relative; width: 100%; overflow: hidden; }
+        .iframe-responsive iframe { width: 100% !important; max-width: 100% !important; display: block; }
+
+        @media screen and (max-width: 600px) {
+            .row, .s-content, .s-header__inner,
+            .s-intro__content, .s-about__content,
+            .s-pagecontent, .pagecontent {
+                padding-left: 1.6rem !important;
+                padding-right: 1.6rem !important;
+            }
+            .s-intro__content-title { font-size: clamp(3.2rem, 8vw, 5.6rem) !important; line-height: 1.15 !important; }
+            .s-intro__content-pretitle { font-size: 1.4rem !important; }
+            .s-about__content-main { padding: 0 !important; }
+            .attention-getter { font-size: 1.6rem !important; }
+            .grid-list-items { display: block !important; }
+            .grid-list-items__item { width: 100% !important; margin-bottom: 3.2rem !important; }
+            .list-items__item { width: 100% !important; }
+            .list-items__item-title { font-size: 1.8rem !important; }
+            .s-about__social.social-list, .s-footer__social.social-list { flex-wrap: wrap; gap: 1.4rem !important; justify-content: center; }
+            .page-title { font-size: clamp(3.2rem, 9vw, 5.6rem) !important; }
+            .pageintro .column { width: 100% !important; }
+            .s-footer__bottom .column { width: 100% !important; }
+            .ss-copyright { text-align: center !important; margin-top: 1.6rem; }
+            .s-footer__social { justify-content: center !important; }
+            .btn.u-fullwidth { width: 100% !important; text-align: center; }
+            .s-header__contact-btn { font-size: 1.2rem !important; padding: 0.8rem 1.2rem !important; }
+        }
+        @media screen and (min-width: 601px) and (max-width: 900px) {
+            .s-intro__content-title { font-size: clamp(4rem, 7vw, 7rem) !important; }
+            .grid-list-items__item { width: 100% !important; }
+        }
+    </style>
+
+    <!-- Sticky Header
+    ================================================== -->
+    <style>
+        .s-header {
+            position: fixed !important;
+            top: 0; left: 0; right: 0;
+            width: 100%;
+            z-index: 999;
+            background: rgba(17, 17, 17, 0.92) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            transition: background 0.3s ease;
+        }
+        [id] { scroll-margin-top: 80px; }
+    </style>
+
 </head>
 
 
@@ -72,7 +128,7 @@
                     </ul> <!-- s-header__menu-links -->
 
                     <div class="s-header__contact">
-                        <a href="https://drive.google.com/drive/folders/16HZXx7fKNG_k8Qe-90vBQRa1fBREbmX6?usp=sharing" target="_blank" class="btn btn--primary s-header__contact-btn">Tài liệu về tôi</a>                        
+                        <a href="https://quangxuanle21.github.io/2024/" target="_blank" class="btn btn--primary s-header__contact-btn">Let's Work Together</a>                        
                     </div> <!-- s-header__contact -->
     
                 </nav> <!-- end s-header__nav -->
@@ -85,29 +141,18 @@
         ================================================== -->
         <section id="content" class="s-content">
 
-            <section class="s-pageheader pageheader">
-                <div class="row">
-                    <div class="column xl-12">
-                        <h1 class="page-title">
-                            <span class="page-title__small-type text-pretitle">Contact</span>
-                            Get In Touch
-                        </h1>                            
+               <section class="s-pageheader pageheader">
+                    <div class="row">
+                        <div class="column xl-12">
+                            <h1 class="page-title">
+                                <span class="page-title__small-type text-pretitle">Contact</span>
+                                Get In Touch
+                            </h1>                            
+                        </div>
                     </div>
-                </div>
-            </section> <!-- pageheader -->  
+               </section> <!--pageheader -->  
 
-            <section class="s-pagecontent pagecontent">
-                    
-                    <div class="row pagemedia">
-                        <d class="column xl-12">
-                            <figure class="page-media">                                
-                                <img src="images\thumbs\contact\about-1200copy.jpg" 
-                                     srcset="images\thumbs\contact\about-1200copy.jpg 2400w, 
-                                             images\thumbs\contact\about-1200copy.jpg 1200w, 
-                                             images\thumbs\contact\about-1200copy.jpg 600w" sizes="(max-width: 2400px) 100vw, 2400px" alt="">
-                            </figure>
-                        </d>
-                    </div> <!-- pagemedia --> 
+               <section class="s-pagecontent pagecontent">
 
                     <div class="row width-narrower pagemain">
                         <div class="column xl-12">
@@ -130,6 +175,11 @@
                                 <div class="column xl-5 md-12 u-flexitem-x-right">
 
                                     <div class="contact-block">
+                                        <h6>Follow On </h6>
+                                        
+                                    </div>
+
+                                    <div class="contact-block">
                                         <h6>Email</h6>
                                         <a href="mailto:lexuanquang1408@gmail.com">lexuanquang1408@gmail.com</a>
                                     </div>
@@ -137,8 +187,8 @@
                                     <div class="contact-block">
                                         <h6>Phone</h6>
                                         <ul class="contact-list">
-                                            <li><a href="tel:197-543-2345">0963867098</a></li>
-                                            <li><a href="tel:197-123-9876"></a></li>
+                                            <li><a href="tel:197-543-2345">0963867098
+                                           
                                         </ul>
                                     </div>
 
@@ -166,14 +216,14 @@
                                 <span class="u-screen-reader-text">Facebook</span>
                             </a>
                         </li>
- 
+
                         <li>
                             <a href="https://www.instagram.com/quang.lexus/" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"width="24" height="24" style="fill:rgba(0, 0, 0, 1);"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
                                 <span class="u-screen-reader-text">Instagram</span>
                             </a>
                         </li>
- 
+
                         <li>
                             <a href="https://www.threads.com/@quang.lexus" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"width="24" height="24" style="fill:rgba(0, 0, 0, 1);">
@@ -181,7 +231,7 @@
                                 <span class="u-screen-reader-text">threads</span>
                             </a>
                         </li>
- 
+
 <li>
                         <a href="https://www.linkedin.com/in/xuan-quang-le-lxq999/" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="fill:rgba(0, 0, 0, 1);">
@@ -198,7 +248,7 @@
                         <span>Redesign by <a href="https://quangxuanle21.github.io/2024/">XuanQuang</a> Distribution By <a href="https://themewagon.com">ThemeWagon</a></span>
                     </p>
                 </div>
- 
+
                 <div class="ss-go-top">
                     <a class="smoothscroll" title="Back to Top" href="#top">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">&lt;!--!  Atomicons Free 1.00 by @atisalab License - https://atomicons.com/license/ (Icons: CC BY 4.0) Copyright 2021 Atomicons --&gt;<polyline points="17 11 12 6 7 11"></polyline><line x1="12" y1="18" x2="12" y2="6"></line></svg>
