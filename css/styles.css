@@ -4781,3 +4781,219 @@ td:last-child {
 .contact-list li {
 	padding-left: 0;
 }
+
+/* ==========================================================================
+   Responsive Overrides — consolidated from HTML files
+   ========================================================================== */
+
+/* Base fixes */
+*, *::before, *::after { box-sizing: border-box; }
+body, .s-pagewrap { overflow-x: hidden; }
+img { max-width: 100%; height: auto; }
+
+/* Responsive iframes */
+.iframe-responsive {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.iframe-responsive iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block;
+}
+
+/* ── Mobile (≤ 600px) ─────────────────────────── */
+@media screen and (max-width: 600px) {
+    .row, .s-header__inner,
+    .s-intro__content, .s-about__content,
+    .s-pagecontent, .pagecontent {
+        padding-left: 1.6rem !important;
+        padding-right: 1.6rem !important;
+    }
+    .s-intro__content-title {
+        font-size: clamp(3.2rem, 8vw, 5.6rem) !important;
+        line-height: 1.15 !important;
+    }
+    .s-intro__content-pretitle { font-size: 1.4rem !important; }
+    .s-about__content-main { padding: 0 !important; }
+    .attention-getter { font-size: 1.6rem !important; }
+    .grid-list-items { display: block !important; }
+    .grid-list-items__item {
+        width: 100% !important;
+        margin-bottom: 3.2rem !important;
+    }
+    .list-items__item { width: 100% !important; }
+    .list-items__item-title { font-size: 1.8rem !important; }
+    .s-about__social.social-list,
+    .s-footer__social.social-list {
+        flex-wrap: wrap;
+        gap: 1.4rem !important;
+        justify-content: center;
+    }
+    .page-title { font-size: clamp(3.2rem, 9vw, 5.6rem) !important; }
+    .pageintro .column { width: 100% !important; }
+    .s-footer__bottom .column { width: 100% !important; }
+    .ss-copyright {
+        text-align: center !important;
+        margin-top: 1.6rem;
+    }
+    .s-footer__social { justify-content: center !important; }
+    .btn.u-fullwidth {
+        width: 100% !important;
+        text-align: center;
+    }
+    .s-header__contact-btn {
+        font-size: 1.2rem !important;
+        padding: 0.8rem 1.2rem !important;
+    }
+
+    /* Khôi phục nested .row về padding 0 — tránh overflow 2 cạnh */
+    .row .row {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* ── Tablet (601px – 900px) ───────────────────── */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    .s-intro__content-title { font-size: clamp(4rem, 7vw, 7rem) !important; }
+    .grid-list-items__item { width: 100% !important; }
+    .iframe-responsive iframe { height: 500px !important; }
+
+    /* Pageheader: cho .row chiếm 100% để background không thừa 2 bên */
+    .s-pageheader .row,
+    .s-pageheader .row.width-sixteen-col {
+        width: 100% !important;
+        padding-left: 5vw !important;
+        padding-right: 5vw !important;
+    }
+}
+
+/* ── Mobile + Tablet: s-pageheader full-width ─── */
+@media screen and (max-width: 900px) {
+    .s-pageheader .row {
+        width: 100% !important;
+    }
+}
+
+/* ==========================================================================
+   Sticky Header — consolidated from HTML files
+   ========================================================================== */
+.s-header {
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
+    width: 100%;
+    z-index: 999;
+    background: rgba(17, 17, 17, 0.92) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    transition: background 0.3s ease;
+}
+/* Home page: transparent at top */
+.ss-home .s-header { background: rgba(17, 17, 17, 0.55) !important; }
+.ss-home .s-header.header-scrolled { background: rgba(17, 17, 17, 0.92) !important; }
+
+[id] { scroll-margin-top: 80px; }
+
+/* ==========================================================================
+   Social Icons — intro hero
+   ========================================================================== */
+.s-intro__content-text .s-about__social.social-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.8rem;
+    padding: 0;
+    margin: 2.8rem 0 0 0;
+    list-style: none;
+}
+.s-intro__content-text .s-about__social li a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+}
+.s-intro__content-text .s-about__social li a:hover {
+    transform: translateY(-5px) scale(1.18);
+    background: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ==========================================================================
+   Logo refinement — modern / social-media style + glassmorphism + float
+   ========================================================================== */
+
+/* Floating keyframe — lửng lơ quanh điểm giữa cố định */
+@keyframes logo-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    30%       { transform: translateY(-5px) rotate(0.5deg); }
+    65%       { transform: translateY(-3px) rotate(-0.3deg); }
+}
+
+/* ── Desktop (≥901px): nudge sát trái hơn, giữ offset dọc gốc ── */
+@media screen and (min-width: 901px) {
+    .s-header__logo {
+        transform: translate(-0.6rem, -0.15em);
+    }
+}
+
+/* ── Mobile/Tablet (≤900px): KHÔI PHỤC translateY(-50%) để căn giữa dọc ── */
+@media screen and (max-width: 900px) {
+    .s-header__logo {
+        left     : 1.6rem !important;
+        transform: translateY(-50%) !important;
+    }
+}
+@media screen and (max-width: 600px) {
+    .s-header__logo {
+        left: 1.2rem !important;
+    }
+}
+
+/* ── Glass container (thẻ <a>) — glassmorphism + float animation ── */
+.s-header__logo a {
+    display                : inline-flex;
+    align-items            : center;
+    justify-content        : center;
+    padding                : 4px;
+    border-radius          : 14px;
+    background             : rgba(255, 255, 255, 0.07);
+    backdrop-filter        : blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow             :
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),   /* shine phía trên */
+        0 0 0 1px rgba(255, 255, 255, 0.08),        /* viền kính */
+        0 0 14px rgba(180, 90, 220, 0.22),           /* glow tím */
+        0 0 28px rgba(235, 130, 80, 0.11),           /* glow cam */
+        0 4px 16px rgba(0, 0, 0, 0.28);             /* depth shadow */
+    animation              : logo-float 5s ease-in-out infinite;
+    transition             : box-shadow 0.3s ease, background 0.25s ease;
+    will-change            : transform;
+}
+
+/* Hover: tăng glow, không can thiệp vào transform (animation tự xử lý) */
+.s-header__logo a:hover {
+    background : rgba(255, 255, 255, 0.13);
+    box-shadow :
+        inset 0 1px 0 rgba(255, 255, 255, 0.32),
+        0 0 0 1px rgba(255, 255, 255, 0.15),
+        0 0 22px rgba(180, 90, 220, 0.38),
+        0 0 42px rgba(235, 130, 80, 0.20),
+        0 6px 24px rgba(0, 0, 0, 0.38);
+}
+
+/* ── Ảnh logo ── */
+.s-header__logo img {
+    width        : 38px !important;
+    height       : 38px !important;
+    border-radius: 10px;
+    object-fit   : cover;
+    display      : block;
+    margin       : 0;
+}
